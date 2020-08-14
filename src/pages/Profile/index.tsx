@@ -150,7 +150,7 @@ const Profile: React.FC = () => {
           uri: response.uri,
         });
 
-        api.put('/users/avatar', data).then(apiResponse => {
+        api.patch('/users/avatar', data).then(apiResponse => {
           updateUser(apiResponse.data);
         });
       },
@@ -172,16 +172,15 @@ const Profile: React.FC = () => {
           contentContainerStyle={{ flex: 1 }}
           keyboardShouldPersistTaps="handled"
         >
+          <BackButton onPress={handleGoBack}>
+            <Icon name="chevron-left" size={24} color="#999591" />
+          </BackButton>
           <Container>
-            <BackButton onPress={handleGoBack}>
-              <Icon name="chevron-left" size={24} color="#999591" />
-            </BackButton>
-
             <UserAvatarButton onPress={handleUpdateAvatar}>
               <UserAvatar source={{ uri: user.avatar_url }} />
             </UserAvatarButton>
 
-            <View>
+            <View style={{ width: '100%' }}>
               <Title>Meu perfil</Title>
             </View>
             <Form initialData={user} onSubmit={handleSignUp} ref={formRef}>
